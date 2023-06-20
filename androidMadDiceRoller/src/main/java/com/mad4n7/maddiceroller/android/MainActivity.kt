@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingView(component: ComponentActivity = ComponentActivity()) {
     val diceSides = 6
-    var diceImageId = remember { mutableStateOf(R.drawable.dice_3) }
+    val madCount = 3
+    val diceImageId = remember { mutableStateOf(R.drawable.dice_3) }
     val dice = remember { Dice(diceSides) }
 
     Column(
@@ -56,8 +57,7 @@ fun GreetingView(component: ComponentActivity = ComponentActivity()) {
         Button(
             onClick = {
                 diceImageId.value = getNewImageId(dice.roll())
-                Toast.makeText(component, "Count: ${dice.rollsCount}", Toast.LENGTH_SHORT).show()
-                if (dice.rollsCount > 3) {
+                if (dice.rollsCount > madCount) {
                     Toast.makeText(component, "What are you doing?", Toast.LENGTH_SHORT).show()
                 }
             },
